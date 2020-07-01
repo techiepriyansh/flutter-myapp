@@ -24,7 +24,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http: ^0.12.1
+  flutter_midi:
+    git:
+      url: git://github.com/danpanaite/flutter_midi.git
+      ref: bug/resolve-future
+      path: packages/flutter_midi
+
+  provider: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -45,6 +51,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  
+  assets:
+   - assets/Perfect_Sine.sf2
 
   # To add assets to your application, add an assets section, like this:
   # assets:
