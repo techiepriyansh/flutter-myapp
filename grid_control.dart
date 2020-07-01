@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutternome/grid_state.dart';
+import 'package:myapp/grid_state.dart';
 
 class GridControl extends StatefulWidget {
   @override

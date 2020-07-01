@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutternome/grid_state.dart';
-import 'package:flutternome/grid_control.dart';
-import 'package:flutternome/grid.dart';
-import 'package:flutternome/grid_size.dart';
+import 'package:myapp/grid_state.dart';
+import 'package:myapp/grid_control.dart';
+import 'package:myapp/grid.dart';
+import 'package:myapp/grid_size.dart';
 
 void main() {
   runApp(
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutternome',
+      title: 'myapp',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

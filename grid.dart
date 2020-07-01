@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutternome/grid_size.dart';
+import 'package:myapp/grid_size.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutternome/grid_state.dart';
-import 'package:flutternome/grid_button.dart';
+import 'package:myapp/grid_state.dart';
+import 'package:myapp/grid_button.dart';
 
 class Grid extends StatelessWidget {
 
