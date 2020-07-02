@@ -53,8 +53,8 @@ flutter:
   uses-material-design: true
   
   assets:
-   - assets/Perfect_Sine.sf2
-   - assets/R-newage.sf2
+   - assets/Piano.sf2
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

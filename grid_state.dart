@@ -16,8 +16,8 @@ class GridState extends ChangeNotifier{
     musicalKey = MusicalKey.getMajor("C4");
     musicalKeyName = "C4 Major";
     SystemChrome.setEnabledSystemUIOverlays([]);
-    rootBundle.load("assets/R-newage.sf2").then((sf2) {
-      FlutterMidi.prepare(sf2: sf2, name: "R-newage.sf2");
+    rootBundle.load("assets/Piano.sf2").then((sf2) {
+      FlutterMidi.prepare(sf2: sf2, name: "Piano.sf2");
     });
 
   }
