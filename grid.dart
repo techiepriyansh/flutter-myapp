@@ -1,59 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/grid_size.dart';
 import 'package:provider/provider.dart';
 
+import 'package:myapp/grid_size.dart';
 import 'package:myapp/grid_state.dart';
 import 'package:myapp/grid_button.dart';
 
 class Grid extends StatelessWidget {
-
-  final int gridSize;
-
-  const Grid({Key key, this.gridSize}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final gridSize = GridSize.size;
     final buttons = List.generate(
-      gridSize,
-      (columnIndex) => List.generate(
         gridSize,
-        (rowIndex) => GridButton(
-          rowIndex,
-          columnIndex,
-          onTapDown: (details) {
-            Provider.of<GridState>(context).isButtonSelected(columnIndex, rowIndex)
-              ? Provider.of<GridState>(context).removeButton(columnIndex, rowIndex)
-              : Provider.of<GridState>(context).addButton(columnIndex, rowIndex);
-          },
-          onPanUpdate: (details) {
-            Provider.of<GridState>(context).addButton(columnIndex, rowIndex);
-          }
-        ),
-      ),
-    );
+        (columnIndex) => List.generate(
+            gridSize, (rowIndex) {
 
-    var buttonGrid = Row(
+              //find out which degree this button is
+              int pos = rowIndex * gridSize + columnIndex;
+              int middle = gridSize * ((gridSize + 1)/2).floor();
+              if (pos < middle) pos -= 1;
+              int degree = pos - middle + 1;
+
+              int note = Provider.of<GridState>(context).musicalKey.getNoteAt(degree);
+
+              return GridButton(columnIndex, rowIndex, note); 
+            
+            }));
+
+    final buttonGrid = Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: buttons
           .map(
-            (buttonColumn) => Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: buttonColumn,
+            (buttonColumn) => Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: buttonColumn,
+              ),
             ),
           )
           .toList(),
     );
 
-    return Container(
-      width: GridSize.width,
-      height: GridSize.height,
-      decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(5.0),
-          border: Border.all(width: 2.0, color: Color(0xFF3e3e3e))),
-      child: buttonGrid,
-    );
+    return buttonGrid;
   }
 }

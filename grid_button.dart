@@ -1,58 +1,85 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/grid_size.dart';
 import 'package:provider/provider.dart';
 
+import 'package:myapp/my_colors.dart';
 import 'package:myapp/grid_state.dart';
 
-class GridButton extends StatelessWidget {
 
-  final int row;
-  final int column;
+import 'package:flutter_midi/flutter_midi.dart';
 
-  final Function onTapDown;
-  final Function onPanUpdate;
+class GridButton extends StatefulWidget {
+  final int columnIndex;
+  final int rowIndex;
+  final int note; 
 
-  const GridButton(this.row, this.column, {key, this.onTapDown, this.onPanUpdate}) : super(key: key);
+  GridButton(this.columnIndex, this.rowIndex, this.note, {Key key}) : super(key: key);
+
+  @override
+  GridButtonState createState() => GridButtonState();
+}
+
+class GridButtonState extends State<GridButton> {
+  bool isClicked = false;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GridState>(
-      builder: (context, grid, child) {
+    var color = !isClicked ? MyColors.light : MyColors.dark;
 
-        final isTriggered = grid.isButtonTriggered(column, row);
-
-        final color = isTriggered
-            ? Color(0xFFa3c3d9).withOpacity(0.5)
-            : grid.isButtonSelected(column, row)
-                ? Color(0xFFa3c3d9)
-                : Colors.white;
-
-        return GestureDetector(
-          onTapDown: this.onTapDown,
-          onPanUpdate: this.onPanUpdate,
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 125),
-            width: GridSize.buttonWidth,
-            height: GridSize.buttonHeight,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              border: !isTriggered
-                  ? Border.all(width: 2.0, color: Color(0xFF3e3e3e))
-                  : null,
-              boxShadow: isTriggered
-                  ? [
-                      BoxShadow(
-                        blurRadius: 12.0,
-                        spreadRadius: 2.0,
-                        color: Colors.white,
-                      ),
-                    ]
-                  : [],
-              color: color,
+    return Expanded(
+      flex: 1,
+      child: GestureDetector(
+        onTapDown: this.onTapDown,
+        onTapUp: this.onTapUp,
+        onTapCancel: this.onTapCancel,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 5),
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 0.2,
+              color: MyColors.dark,
+            ),
+            color: color,
+          ),
+          child: Center(
+            child: Text(
+              "${widget.columnIndex + 1}",
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w100,
+                  color: !isClicked ? MyColors.dark : MyColors.light),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
+  }
+
+  void onTapDown(details) {
+
+    FlutterMidi.playMidiNote(midi: widget.note);
+    
+    setState(() {
+      isClicked = true;
+    });
+  }
+
+  void onTapUp(details) {
+
+    FlutterMidi.stopMidiNote(midi: widget.note);
+
+    setState(() {
+      isClicked = false;
+    });
+  }
+
+  void onTapCancel() {
+
+    FlutterMidi.stopMidiNote(midi: widget.note);
+
+    setState(() {
+      isClicked = false;
+    });
   }
 }
