@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_midi/flutter_midi.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter.services.dart';
+import 'package:flutter/services.dart';
 
-import 'package/frequencies.dart';
+import 'package:myapp/frequencies.dart';
 
 class GridState extends ChangeNotifier{
   final int gridSize;

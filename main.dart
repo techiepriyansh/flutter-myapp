@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:myapp/grid.dart';
 import 'package:myapp/grid_size.dart';
 import 'package:myapp/my_colors.dart';
 import 'package:myapp/grid_state.dart';
 
-import 'package/frequencies.dart';
+import 'package:myapp/frequencies.dart';
 
 
 void main() {
