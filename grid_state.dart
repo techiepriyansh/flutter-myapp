@@ -12,7 +12,9 @@ class GridState extends ChangeNotifier{
   MusicalKey musicalKey;
   String musicalKeyName;
   
-  GridState({this.gridSize = 6, this.musicalKey = MusicalKey.getMajor("C4"), this.musicalKeyName = "C4 Major"}) {
+  GridState({this.gridSize = 7}) {
+    musicalKey = MusicalKey.getMajor("C4");
+    musicalKeyName = "C4 Major";
     rootBundle.load("assets/Perfect_Sine.sf2").then((sf2) {
       FlutterMidi.prepare(sf2: sf2, name: "Perfect_Sine.sf2");
     });
