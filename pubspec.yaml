@@ -24,9 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #flutter_midi: ^1.0.1
+
   flutter_midi:
     git:
-      url: git://github.com/danpanaite/flutter_midi.git
+      url: git://github.com/techiepriyansh/flutter_midi.git
       ref: bug/resolve-future
       path: packages/flutter_midi
 
